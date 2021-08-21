@@ -1,11 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import os
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
 
-ANSWERS_PATH = 'dataset\mohler_dataset_edited.csv'
+ANSWERS_PATH = os.path.join(os.getcwd(), 'dataset/mohler_dataset_edited.csv')
 answers_data = pd.read_csv(ANSWERS_PATH)
 
 count = answers_data['score_avg'].value_counts(sort=False)

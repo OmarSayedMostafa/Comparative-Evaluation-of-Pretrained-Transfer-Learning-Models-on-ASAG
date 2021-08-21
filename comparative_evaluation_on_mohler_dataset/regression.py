@@ -1,10 +1,11 @@
 import numpy as np
+from numpy.core.fromnumeric import mean
 import pandas as pd
-
+from tqdm import tqdm
 from Processing.Stats import Metrics
 from Training.Regression import RegressionAnalysis
 
-df = pd.read_csv('dataset/answers_with_similarity_score.csv')
+df = pd.read_csv('dataset/mohler_dataset_base.csv')
 
 
 def train_test_split(data, percentage):
@@ -20,8 +21,10 @@ def avg(given_list):
 
 
 def calculate_results(model_name):
+    model_name_score = model_name.lower() + '_base_score_mowe'
+
+    df[model_name_score] = (df[model_name_score]-np.mean(df[model_name_score]))/np.std(df[model_name_score])
     train_data, test_data = train_test_split(df, 70)
-    model_name_score = 'normalized_' + model_name.lower() + '_score'
     train_data_x = train_data[model_name_score]
     train_data_y = train_data['score_avg']
 
@@ -43,7 +46,7 @@ def calculate_results(model_name):
 
 if __name__ == '__main__':
 
-    name = str(input('Enter the model name(bert, elmo, gpt, gpt2) to calculate results: '))
+    name = str(input('Enter the model name(bert, elmo, gpt, gpt2, t5) to calculate results: '))
 
     iso_rmse = []
     iso_pearson = []
@@ -54,7 +57,7 @@ if __name__ == '__main__':
     rid_rmse = []
     rid_pearson = []
 
-    for i in range(0, 1000):
+    for i in tqdm(range(0, 1000)):
         iso_rmse_score, iso_pc_score, lin_rmse_score, lin_pc_score, rid_rmse_score, rid_pc_score = calculate_results(
             name)
         iso_rmse.append(iso_rmse_score)

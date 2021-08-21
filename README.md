@@ -91,18 +91,24 @@
 | **Model**  | **Isotonic Regression** | **Linear Regression** | **Ridge regression** |
 |--------|---------------------|-------------------|------------------|
 | ELMo   |  0\.485            |  0\.451            |  0\.449           |
+| T5-small |  0\.388            |  0\.379             |  0\.379           |
+| T5-large |  0\.368            |  0\.318             |  0\.317           |
 | GPT    |  0\.248            |  0\.222            |  0\.217           |
 | BERT   |  0\.318            |  0\.266            |  0\.269           |
 | GPT\-2 |  0\.311            |  0\.274            |  0\.269           |
+
 
 **Root Mean Square Error (RMSE) score of pretrained transfer learning models on Mohler dataset**
 
 | **Model**  | **Isotonic Regression** | **Linear Regression** | **Ridge regression** |
 |--------|---------------------|-------------------|------------------|
 | ELMo   |  0\.978            |  0\.995            |  0\.996         |
+| T5-large |  1.035            |  1.054            |  1.054           |
 | GPT    |  1.082            |  1.088            |  1.089           |
 | BERT   |  1.057            |  1.077            |  1.075           |
 | GPT\-2 |  1.065            |  1.078            |  1.079           |
+
+
 
 **Overview comparison of results on Mohler dataset with former approaches**
 | **Model/Approach** |     **Features**    |     **RMSE**     | **Pearson correlation** |

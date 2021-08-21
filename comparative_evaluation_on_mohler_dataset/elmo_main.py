@@ -1,6 +1,8 @@
 import json
+from nltk.util import pr
 
 import pandas as pd
+from tqdm import tqdm
 
 from Models.Embeddings import Embedding2Array
 from PreProcessing.Tools import PreProcess
@@ -33,7 +35,7 @@ if __name__ == '__main__':
     elmo_similarity_score = {}
 
     # For each student answer, get id, question, desired answer
-    for stu_ans in student_answers:
+    for stu_ans in tqdm(student_answers):
         id = df.loc[df['student_answer'] == stu_ans, 'id'].iloc[0]
         question = df.loc[df['student_answer'] == stu_ans, 'question'].iloc[0]
         desired_answer = df.loc[df['student_answer'] == stu_ans, 'desired_answer'].iloc[0]
@@ -48,6 +50,7 @@ if __name__ == '__main__':
         word_array_1 = embed2arr.elmo(pp_desired)
         word_array_2 = embed2arr.elmo(pp_student)
 
+        print(word_array_1.shape)
         # Compare and assign cosine similarity to the answers
 
         similarity_tools = SimilarityFunctions(word_array_1, word_array_2)
